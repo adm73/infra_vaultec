@@ -19,46 +19,28 @@ For commercial licensing, please contact support@quantumnous.com
 
 import { useMemo } from 'react';
 
-export const useNavigation = (t, docsLink, headerNavModules, userState) => {
+const DEFAULT_DOCS_LINK =
+  'https://github.com/adm73/infra_vaultec/tree/main/docs';
+
+export const useNavigation = (t, docsLink, isConsoleRoute) => {
   const mainNavLinks = useMemo(() => {
-    // 默认配置，如果没有传入配置则显示所有模块
-    const defaultModules = {
-      home: true,
-      console: true,
-      pricing: true,
-      docs: true,
-      about: true,
-    };
-
-    // 使用传入的配置或默认配置
-    const modules = headerNavModules || defaultModules;
-
-    const allLinks = [
+    const links = [
       {
-        text: userState?.user ? t('管理后台') : t('首页'),
+        text: t('首页'),
         itemKey: 'home',
-        to: userState?.user ? '/console' : '/',
-      },
-      {
-        text: t('控制台'),
-        itemKey: 'console',
-        to: '/console',
+        to: '/',
       },
       {
         text: t('模型广场'),
         itemKey: 'pricing',
         to: '/pricing',
       },
-      ...(docsLink
-        ? [
-            {
-              text: t('文档'),
-              itemKey: 'docs',
-              isExternal: true,
-              externalLink: docsLink,
-            },
-          ]
-        : []),
+      {
+        text: t('文档'),
+        itemKey: 'docs',
+        isExternal: true,
+        externalLink: docsLink || DEFAULT_DOCS_LINK,
+      },
       {
         text: t('关于'),
         itemKey: 'about',
@@ -66,23 +48,10 @@ export const useNavigation = (t, docsLink, headerNavModules, userState) => {
       },
     ];
 
-    // 根据配置过滤导航链接
-    return allLinks.filter((link) => {
-      if (link.itemKey === 'docs') {
-        return docsLink && modules.docs;
-      }
-      if (link.itemKey === 'pricing') {
-        // 支持新的pricing配置格式
-        return typeof modules.pricing === 'object'
-          ? modules.pricing.enabled
-          : modules.pricing;
-      }
-      if (link.itemKey === 'console') {
-        return false;
-      }
-      return modules[link.itemKey] === true;
-    });
-  }, [t, docsLink, headerNavModules, userState]);
+    return isConsoleRoute
+      ? links.filter((link) => link.itemKey !== 'home')
+      : links;
+  }, [t, docsLink, isConsoleRoute]);
 
   return {
     mainNavLinks,

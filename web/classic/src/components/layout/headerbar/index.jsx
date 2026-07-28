@@ -44,7 +44,6 @@ const HeaderBar = ({ onMobileMenuToggle, drawerOpen }) => {
     isDemoSiteMode,
     isConsoleRoute,
     theme,
-    headerNavModules,
     pricingRequireAuth,
     logout,
     handleLanguageChange,
@@ -62,12 +61,7 @@ const HeaderBar = ({ onMobileMenuToggle, drawerOpen }) => {
     getUnreadKeys,
   } = useNotifications(statusState);
 
-  const { mainNavLinks } = useNavigation(
-    t,
-    docsLink,
-    headerNavModules,
-    userState,
-  );
+  const { mainNavLinks } = useNavigation(t, docsLink, isConsoleRoute);
 
   return (
     <header className='sticky top-0 z-50 border-b border-[#e4c8a8]/50 bg-white/88 text-[#5b3923] shadow-[0_10px_30px_rgba(188,145,96,0.08)] backdrop-blur-xl transition-colors duration-300'>
