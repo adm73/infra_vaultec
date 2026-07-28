@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"strings"
+
 	"github.com/adm73/infra_vaultec/common"
 	"github.com/adm73/infra_vaultec/model"
 	"github.com/adm73/infra_vaultec/service"
@@ -8,6 +10,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
+
+const anonymousPricingGroup = "default"
+
+var publicPricingGroups = map[string]string{
+	"default": "默认分组",
+	"vip":     "VIP 分组",
+}
 
 func filterPricingByUsableGroups(pricing []model.Pricing, usableGroup map[string]string) []model.Pricing {
 	if len(pricing) == 0 {
@@ -33,29 +42,46 @@ func filterPricingByUsableGroups(pricing []model.Pricing, usableGroup map[string
 	return filtered
 }
 
+func getPricingUserGroup(c *gin.Context) string {
+	group := anonymousPricingGroup
+	userID, exists := c.Get("id")
+	if !exists {
+		return group
+	}
+
+	user, err := model.GetUserCache(userID.(int))
+	if err == nil && strings.TrimSpace(user.Group) != "" {
+		group = user.Group
+	}
+	return group
+}
+
+func getPricingDisplayGroups(userGroup string) map[string]string {
+	groups := service.GetUserUsableGroups(userGroup)
+	for group, description := range publicPricingGroups {
+		if _, exists := groups[group]; !exists {
+			groups[group] = description
+		}
+	}
+	return groups
+}
+
 func GetPricing(c *gin.Context) {
 	pricing := model.GetPricing()
-	userId, exists := c.Get("id")
 	usableGroup := map[string]string{}
 	groupRatio := map[string]float64{}
 	for s, f := range ratio_setting.GetGroupRatioCopy() {
 		groupRatio[s] = f
 	}
-	var group string
-	if exists {
-		user, err := model.GetUserCache(userId.(int))
-		if err == nil {
-			group = user.Group
-			for g := range groupRatio {
-				ratio, ok := ratio_setting.GetGroupGroupRatio(group, g)
-				if ok {
-					groupRatio[g] = ratio
-				}
-			}
+	group := getPricingUserGroup(c)
+	for g := range groupRatio {
+		ratio, ok := ratio_setting.GetGroupGroupRatio(group, g)
+		if ok {
+			groupRatio[g] = ratio
 		}
 	}
 
-	usableGroup = service.GetUserUsableGroups(group)
+	usableGroup = getPricingDisplayGroups(group)
 	pricing = filterPricingByUsableGroups(pricing, usableGroup)
 	// check groupRatio contains usableGroup
 	for group := range ratio_setting.GetGroupRatioCopy() {
