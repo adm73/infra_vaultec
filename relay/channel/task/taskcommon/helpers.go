@@ -4,10 +4,10 @@ import (
 	"encoding/base64"
 	"fmt"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/model"
-	relaycommon "github.com/QuantumNous/new-api/relay/common"
-	"github.com/QuantumNous/new-api/setting/system_setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/model"
+	relaycommon "github.com/adm73/infra_vaultec/relay/common"
+	"github.com/adm73/infra_vaultec/setting/system_setting"
 	"github.com/gin-gonic/gin"
 )
 

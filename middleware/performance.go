@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/types"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/types"
 	"github.com/gin-gonic/gin"
 )
 
@@ -38,7 +38,7 @@ func SystemPerformanceCheck() gin.HandlerFunc {
 }
 
 // checkSystemPerformance 检查系统性能是否超过阈值
-func checkSystemPerformance() *types.NewAPIError {
+func checkSystemPerformance() *types.VaultecError {
 	config := common.GetPerformanceMonitorConfig()
 	if !config.Enabled {
 		return nil

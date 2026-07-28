@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api/dto"
+	"github.com/adm73/infra_vaultec/dto"
 )
 
 type ChatToResponsesStreamEvent struct {

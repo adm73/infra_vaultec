@@ -3,10 +3,10 @@ package minimax
 import (
 	"fmt"
 
-	channelconstant "github.com/QuantumNous/new-api/constant"
-	relaycommon "github.com/QuantumNous/new-api/relay/common"
-	"github.com/QuantumNous/new-api/relay/constant"
-	"github.com/QuantumNous/new-api/types"
+	channelconstant "github.com/adm73/infra_vaultec/constant"
+	relaycommon "github.com/adm73/infra_vaultec/relay/common"
+	"github.com/adm73/infra_vaultec/relay/constant"
+	"github.com/adm73/infra_vaultec/types"
 )
 
 func GetRequestURL(info *relaycommon.RelayInfo) (string, error) {

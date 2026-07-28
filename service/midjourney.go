@@ -9,12 +9,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/dto"
-	"github.com/QuantumNous/new-api/logger"
-	relayconstant "github.com/QuantumNous/new-api/relay/constant"
-	"github.com/QuantumNous/new-api/setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/constant"
+	"github.com/adm73/infra_vaultec/dto"
+	"github.com/adm73/infra_vaultec/logger"
+	relayconstant "github.com/adm73/infra_vaultec/relay/constant"
+	"github.com/adm73/infra_vaultec/setting"
 
 	"github.com/gin-gonic/gin"
 )
@@ -230,12 +230,12 @@ func DoMidjourneyHttpRequest(c *gin.Context, timeout time.Duration, fullRequestU
 	}
 	var midjResponse dto.MidjourneyResponse
 	var midjourneyUploadsResponse dto.MidjourneyUploadResponse
-	responseBody, err := io.ReadAll(resp.Body)
+	responseBody, err := io.ReadAll(LimitUpstreamResponseBody(resp.Body))
 	if err != nil {
 		return MidjourneyErrorWithStatusCodeWrapper(constant.MjErrorUnknown, "read_response_body_failed", statusCode), nullBytes, err
 	}
 	CloseResponseBodyGracefully(resp)
-	logger.LogDebug(c, "midjourney response body: %s", responseBody)
+	logger.LogDebug(c, "midjourney response received: status=%d bytes=%d", resp.StatusCode, len(responseBody))
 	if len(responseBody) == 0 {
 		return MidjourneyErrorWithStatusCodeWrapper(constant.MjErrorUnknown, "empty_response_body", statusCode), responseBody, nil
 	} else {

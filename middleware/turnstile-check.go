@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/QuantumNous/new-api/common"
+	"github.com/adm73/infra_vaultec/common"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )

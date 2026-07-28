@@ -1,6 +1,6 @@
 package meta
 
-import relaycommon "github.com/QuantumNous/new-api/relay/common"
+import relaycommon "github.com/adm73/infra_vaultec/relay/common"
 
 func RelayInfoChannelType(info *relaycommon.RelayInfo) int {
 	if info == nil || info.ChannelMeta == nil {

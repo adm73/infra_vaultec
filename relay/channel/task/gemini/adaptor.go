@@ -9,15 +9,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/dto"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/relay/channel"
-	taskcommon "github.com/QuantumNous/new-api/relay/channel/task/taskcommon"
-	relaycommon "github.com/QuantumNous/new-api/relay/common"
-	"github.com/QuantumNous/new-api/service"
-	"github.com/QuantumNous/new-api/setting/model_setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/constant"
+	"github.com/adm73/infra_vaultec/dto"
+	"github.com/adm73/infra_vaultec/model"
+	"github.com/adm73/infra_vaultec/relay/channel"
+	taskcommon "github.com/adm73/infra_vaultec/relay/channel/task/taskcommon"
+	relaycommon "github.com/adm73/infra_vaultec/relay/common"
+	"github.com/adm73/infra_vaultec/service"
+	"github.com/adm73/infra_vaultec/setting/model_setting"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 )
@@ -121,7 +121,7 @@ func (a *TaskAdaptor) DoRequest(c *gin.Context, info *relaycommon.RelayInfo, req
 
 // DoResponse handles upstream response, returns taskID etc.
 func (a *TaskAdaptor) DoResponse(c *gin.Context, resp *http.Response, info *relaycommon.RelayInfo) (taskID string, taskData []byte, taskErr *dto.TaskError) {
-	responseBody, err := io.ReadAll(resp.Body)
+	responseBody, err := io.ReadAll(service.LimitUpstreamResponseBody(resp.Body))
 	if err != nil {
 		return "", nil, service.TaskErrorWrapper(err, "read_response_body_failed", http.StatusInternalServerError)
 	}

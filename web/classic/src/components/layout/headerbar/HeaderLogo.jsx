@@ -57,15 +57,15 @@ const HeaderLogo = ({
           >
             <Typography.Title
               heading={4}
-              className='!text-lg !font-semibold !mb-0'
+              className='!mb-0 !text-lg !font-semibold !text-[#4a2a16]'
             >
               {systemName}
             </Typography.Title>
           </SkeletonWrapper>
           {(isSelfUseMode || isDemoSiteMode) && !isLoading && (
             <Tag
-              color={isSelfUseMode ? 'purple' : 'blue'}
-              className='text-xs px-1.5 py-0.5 rounded whitespace-nowrap shadow-sm'
+              color='grey'
+              className='!border !border-[#e4c8a8]/55 !bg-[#fff6ec] !text-[#8d6544] text-xs px-1.5 py-0.5 rounded-full whitespace-nowrap shadow-sm'
               size='small'
               shape='circle'
             >

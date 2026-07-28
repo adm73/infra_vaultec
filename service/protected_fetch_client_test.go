@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/setting/system_setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/setting/system_setting"
 	"github.com/stretchr/testify/require"
 )
 

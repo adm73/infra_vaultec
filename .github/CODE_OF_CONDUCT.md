@@ -36,9 +36,9 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at:
-
-**Email:** support@quantumnous.com
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported to the [repository owner](https://github.com/adm73). Do not include
+sensitive personal details in a public issue.
 
 All complaints will be reviewed and investigated promptly and fairly.
 

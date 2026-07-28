@@ -3,13 +3,13 @@ package relayconvert
 import (
 	"testing"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/dto"
-	relaycommon "github.com/QuantumNous/new-api/relay/common"
-	sharedgemini "github.com/QuantumNous/new-api/service/relayconvert/internal/shared/gemini"
-	"github.com/QuantumNous/new-api/setting/model_setting"
-	"github.com/QuantumNous/new-api/types"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/constant"
+	"github.com/adm73/infra_vaultec/dto"
+	relaycommon "github.com/adm73/infra_vaultec/relay/common"
+	sharedgemini "github.com/adm73/infra_vaultec/service/relayconvert/internal/shared/gemini"
+	"github.com/adm73/infra_vaultec/setting/model_setting"
+	"github.com/adm73/infra_vaultec/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

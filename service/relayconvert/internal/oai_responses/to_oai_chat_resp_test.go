@@ -3,7 +3,7 @@ package oairesponses
 import (
 	"testing"
 
-	"github.com/QuantumNous/new-api/dto"
+	"github.com/adm73/infra_vaultec/dto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/setting/config"
-	"github.com/QuantumNous/new-api/types"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/setting/config"
+	"github.com/adm73/infra_vaultec/types"
 )
 
 var defaultGroupRatio = map[string]float64{

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"sync"
 
-	"github.com/QuantumNous/new-api/common"
+	"github.com/adm73/infra_vaultec/common"
 )
 
 var userUsableGroups = map[string]string{

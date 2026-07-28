@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
+	"github.com/adm73/infra_vaultec/common"
 
 	"gorm.io/gorm"
 )

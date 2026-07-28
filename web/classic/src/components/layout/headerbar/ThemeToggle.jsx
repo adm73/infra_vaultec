@@ -54,8 +54,8 @@ const ThemeToggle = ({ theme, onThemeToggle, t }) => {
 
   const getItemClassName = (isSelected) =>
     isSelected
-      ? '!bg-semi-color-primary-light-default !font-semibold'
-      : 'hover:!bg-semi-color-fill-1';
+      ? '!bg-[#fff1df] !font-semibold'
+      : 'hover:!bg-[#fff7ef]';
 
   const currentButtonIcon = useMemo(() => {
     const currentOption = themeOptions.find((option) => option.key === theme);
@@ -66,17 +66,17 @@ const ThemeToggle = ({ theme, onThemeToggle, t }) => {
     <Dropdown
       position='bottomRight'
       render={
-        <Dropdown.Menu>
+        <Dropdown.Menu className='!rounded-2xl !border !border-[#e4c8a8]/55 !bg-white !shadow-[0_20px_50px_rgba(188,145,96,0.16)]'>
           {themeOptions.map((option) => (
             <Dropdown.Item
               key={option.key}
               icon={option.icon}
               onClick={() => onThemeToggle(option.key)}
-              className={getItemClassName(theme === option.key)}
+              className={`!text-[#5b3923] ${getItemClassName(theme === option.key)}`}
             >
               <div className='flex flex-col'>
                 <span>{option.label}</span>
-                <span className='text-xs text-semi-color-text-2'>
+                <span className='text-xs text-[#8f6848]'>
                   {option.description}
                 </span>
               </div>
@@ -86,7 +86,7 @@ const ThemeToggle = ({ theme, onThemeToggle, t }) => {
           {theme === 'auto' && (
             <>
               <Dropdown.Divider />
-              <div className='px-3 py-2 text-xs text-semi-color-text-2'>
+              <div className='px-3 py-2 text-xs text-[#8f6848]'>
                 {t('当前跟随系统')}：
                 {actualTheme === 'dark' ? t('深色') : t('浅色')}
               </div>
@@ -101,7 +101,7 @@ const ThemeToggle = ({ theme, onThemeToggle, t }) => {
           aria-label={t('切换主题')}
           theme='borderless'
           type='tertiary'
-          className='!p-1.5 !text-current focus:!bg-semi-color-fill-1 !rounded-full !bg-semi-color-fill-0 hover:!bg-semi-color-fill-1'
+          className='!rounded-full !border !border-[#e4c8a8]/45 !bg-[#fffaf4] !p-1.5 !text-[#7b5438] hover:!bg-[#fff1df] hover:!text-[#4a2a16] focus:!bg-[#fff1df]'
         />
       </span>
     </Dropdown>

@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/constant"
 
 	"github.com/glebarez/sqlite"
 	"gorm.io/driver/clickhouse"
@@ -58,8 +58,12 @@ func createRootAccountIfNeed() error {
 	var user User
 	//if user.Status != common.UserStatusEnabled {
 	if err := DB.First(&user).Error; err != nil {
-		common.SysLog("no user exists, create a root user for you: username is root, password is 123456")
-		hashedPassword, err := common.Password2Hash("123456")
+		initialPassword := strings.TrimSpace(os.Getenv("INITIAL_ROOT_PASSWORD"))
+		if len(initialPassword) < 12 {
+			return fmt.Errorf("INITIAL_ROOT_PASSWORD must contain at least 12 characters before creating the first root user")
+		}
+		common.SysLog("no user exists, creating the initial root user from environment configuration")
+		hashedPassword, err := common.Password2Hash(initialPassword)
 		if err != nil {
 			return err
 		}

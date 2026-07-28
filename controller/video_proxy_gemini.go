@@ -6,10 +6,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/relay"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/constant"
+	"github.com/adm73/infra_vaultec/model"
+	"github.com/adm73/infra_vaultec/relay"
+	"github.com/adm73/infra_vaultec/service"
 )
 
 func getGeminiVideoURL(channel *model.Channel, task *model.Task, apiKey string) (string, error) {
@@ -45,7 +46,7 @@ func getGeminiVideoURL(channel *model.Channel, task *model.Task, apiKey string) 
 	}
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
+	body, err := io.ReadAll(service.LimitUpstreamResponseBody(resp.Body))
 	if err != nil {
 		return "", fmt.Errorf("read task response failed: %w", err)
 	}
@@ -180,7 +181,7 @@ func getVertexVideoURL(channel *model.Channel, task *model.Task) (string, error)
 	}
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
+	body, err := io.ReadAll(service.LimitUpstreamResponseBody(resp.Body))
 	if err != nil {
 		return "", fmt.Errorf("read task response failed: %w", err)
 	}

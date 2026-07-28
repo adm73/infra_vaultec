@@ -1,0 +1,19 @@
+# File path: /etc/systemd/system/vaultec.service
+# sudo systemctl daemon-reload
+# sudo systemctl start vaultec
+# sudo systemctl enable vaultec
+# sudo systemctl status vaultec
+[Unit]
+Description=Vaultec Service
+After=network.target
+
+[Service]
+# Adjust the user and paths before installing this template.
+User=ubuntu
+WorkingDirectory=/opt/vaultec
+ExecStart=/opt/vaultec/vaultec --port 3000 --log-dir /opt/vaultec/logs
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

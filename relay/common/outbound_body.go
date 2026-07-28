@@ -3,7 +3,7 @@ package common
 import (
 	"io"
 
-	"github.com/QuantumNous/new-api/common"
+	"github.com/adm73/infra_vaultec/common"
 )
 
 // NewOutboundJSONBody wraps the already-marshaled upstream request body into a

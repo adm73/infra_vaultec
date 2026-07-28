@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/QuantumNous/new-api/dto"
-	"github.com/QuantumNous/new-api/types"
+	"github.com/adm73/infra_vaultec/dto"
+	"github.com/adm73/infra_vaultec/types"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/require"
 )

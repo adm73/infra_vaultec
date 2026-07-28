@@ -149,7 +149,7 @@ export function getCommonHeaders(): Record<string, string> {
 
   const uid = getUserId()
   if (uid) {
-    headers['New-Api-User'] = uid
+    headers['Vaultec-User'] = uid
   }
 
   return headers
@@ -164,7 +164,7 @@ api.interceptors.request.use((config) => {
   const uid = getUserId()
   if (uid) {
     // Custom header for user identification
-    ;(config.headers as Record<string, string>)['New-Api-User'] = uid
+    ;(config.headers as Record<string, string>)['Vaultec-User'] = uid
   }
   return config
 })

@@ -1,11 +1,11 @@
 package router
 
 import (
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/controller"
-	"github.com/QuantumNous/new-api/middleware"
-	"github.com/QuantumNous/new-api/relay"
-	"github.com/QuantumNous/new-api/types"
+	"github.com/adm73/infra_vaultec/constant"
+	"github.com/adm73/infra_vaultec/controller"
+	"github.com/adm73/infra_vaultec/middleware"
+	"github.com/adm73/infra_vaultec/relay"
+	"github.com/adm73/infra_vaultec/types"
 
 	"github.com/gin-gonic/gin"
 )

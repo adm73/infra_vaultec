@@ -578,6 +578,7 @@ const RegisterForm = () => {
                   label={t('用户名')}
                   placeholder={t('请输入用户名')}
                   name='username'
+                  maxLength={32}
                   onChange={(value) => handleChange('username', value)}
                   prefix={<IconUser />}
                 />

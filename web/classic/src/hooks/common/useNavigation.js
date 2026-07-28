@@ -19,7 +19,7 @@ For commercial licensing, please contact support@quantumnous.com
 
 import { useMemo } from 'react';
 
-export const useNavigation = (t, docsLink, headerNavModules) => {
+export const useNavigation = (t, docsLink, headerNavModules, userState) => {
   const mainNavLinks = useMemo(() => {
     // 默认配置，如果没有传入配置则显示所有模块
     const defaultModules = {
@@ -35,9 +35,9 @@ export const useNavigation = (t, docsLink, headerNavModules) => {
 
     const allLinks = [
       {
-        text: t('首页'),
+        text: userState?.user ? t('管理后台') : t('首页'),
         itemKey: 'home',
-        to: '/',
+        to: userState?.user ? '/console' : '/',
       },
       {
         text: t('控制台'),
@@ -77,9 +77,12 @@ export const useNavigation = (t, docsLink, headerNavModules) => {
           ? modules.pricing.enabled
           : modules.pricing;
       }
+      if (link.itemKey === 'console') {
+        return false;
+      }
       return modules[link.itemKey] === true;
     });
-  }, [t, docsLink, headerNavModules]);
+  }, [t, docsLink, headerNavModules, userState]);
 
   return {
     mainNavLinks,

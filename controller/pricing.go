@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/service"
-	"github.com/QuantumNous/new-api/setting/ratio_setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/model"
+	"github.com/adm73/infra_vaultec/service"
+	"github.com/adm73/infra_vaultec/setting/ratio_setting"
 
 	"github.com/gin-gonic/gin"
 )

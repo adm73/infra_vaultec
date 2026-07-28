@@ -1,0 +1,113 @@
+name: vaultec
+
+services:
+  vaultec:
+    image: ${VAULTEC_IMAGE:-ghcr.io/adm73/infra_vaultec:latest}
+    pull_policy: always
+    restart: unless-stopped
+    init: true
+    command: --log-dir /app/logs
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${HOST_PORT:-3001}:3000"
+    volumes:
+      - vaultec_data:/data
+      - vaultec_logs:/app/logs
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      SQL_DSN: postgresql://root:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}@postgres:5432/vaultec
+      REDIS_CONN_STRING: redis://:${REDIS_PASSWORD:?REDIS_PASSWORD must be set}@redis:6379
+      SESSION_SECRET: ${SESSION_SECRET:?SESSION_SECRET must be set}
+      CRYPTO_SECRET: ${CRYPTO_SECRET:?CRYPTO_SECRET must be set}
+      SESSION_COOKIE_SECURE: "true"
+      SESSION_COOKIE_TRUSTED_URL: ${PUBLIC_URL:?PUBLIC_URL must be set to the public HTTPS URL}
+      TZ: ${TZ:-UTC}
+      GIN_MODE: release
+      DEBUG: "false"
+      ERROR_LOG_ENABLED: "true"
+      BATCH_UPDATE_ENABLED: "true"
+      NODE_NAME: ${NODE_NAME:-vaultec-server-1}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - vaultec
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q -O - http://localhost:3000/api/status | grep -q '"success":true'
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 20m
+        max-file: "5"
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
+      POSTGRES_DB: vaultec
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - vaultec
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U root -d vaultec
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD:?REDIS_PASSWORD must be set}
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?REDIS_PASSWORD must be set}
+    networks:
+      - vaultec
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - redis-cli -a "$${REDIS_PASSWORD}" ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+volumes:
+  vaultec_data:
+  vaultec_logs:
+  postgres_data:
+
+networks:
+  vaultec:
+    driver: bridge

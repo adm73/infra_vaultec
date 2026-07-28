@@ -29,6 +29,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { API, showError, getRelativeTime } from '../../helpers';
 import { marked } from 'marked';
+import { sanitizeHtml } from '../../helpers/sanitize';
 import {
   IllustrationNoContent,
   IllustrationNoContentDark,
@@ -89,7 +90,7 @@ const NoticeModal = ({
       const { success, message, data } = res.data;
       if (success) {
         if (data !== '') {
-          const htmlNotice = marked.parse(data);
+          const htmlNotice = sanitizeHtml(marked.parse(data));
           setNoticeContent(htmlNotice);
         } else {
           setNoticeContent('');
@@ -143,7 +144,7 @@ const NoticeModal = ({
 
     return (
       <div
-        dangerouslySetInnerHTML={{ __html: noticeContent }}
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(noticeContent) }}
         className='notice-content-scroll max-h-[55vh] overflow-y-auto pr-2'
       />
     );
@@ -170,8 +171,10 @@ const NoticeModal = ({
       <div className='max-h-[55vh] overflow-y-auto pr-2 card-content-scroll'>
         <Timeline mode='left'>
           {processedAnnouncements.map((item, idx) => {
-            const htmlContent = marked.parse(item.content || '');
-            const htmlExtra = item.extra ? marked.parse(item.extra) : '';
+            const htmlContent = sanitizeHtml(marked.parse(item.content || ''));
+            const htmlExtra = item.extra
+              ? sanitizeHtml(marked.parse(item.extra))
+              : '';
             return (
               <Timeline.Item
                 key={idx}

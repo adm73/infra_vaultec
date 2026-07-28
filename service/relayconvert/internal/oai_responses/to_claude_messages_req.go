@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/dto"
-	relaycommon "github.com/QuantumNous/new-api/relay/common"
-	relaymedia "github.com/QuantumNous/new-api/service/relayconvert/internal/media"
-	sharedclaude "github.com/QuantumNous/new-api/service/relayconvert/internal/shared/claude"
-	"github.com/QuantumNous/new-api/setting/model_setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/dto"
+	relaycommon "github.com/adm73/infra_vaultec/relay/common"
+	relaymedia "github.com/adm73/infra_vaultec/service/relayconvert/internal/media"
+	sharedclaude "github.com/adm73/infra_vaultec/service/relayconvert/internal/shared/claude"
+	"github.com/adm73/infra_vaultec/setting/model_setting"
 	"github.com/gin-gonic/gin"
 )
 

@@ -30,8 +30,9 @@ const Navigation = ({
 }) => {
   const renderNavLinks = () => {
     const baseClasses =
-      'flex-shrink-0 flex items-center gap-1 font-semibold rounded-md transition-all duration-200 ease-in-out';
-    const hoverClasses = 'hover:text-semi-color-primary';
+      'flex-shrink-0 flex items-center gap-1 rounded-full font-semibold text-[#7b5438] transition-all duration-200 ease-in-out';
+    const hoverClasses =
+      'hover:bg-[#fff6ec] hover:text-[#4a2a16] hover:shadow-[0_8px_20px_rgba(188,145,96,0.08)]';
     const spacingClasses = isMobile ? 'p-1' : 'p-2';
 
     const commonLinkClasses = `${baseClasses} ${spacingClasses} ${hoverClasses}`;
@@ -61,8 +62,16 @@ const Navigation = ({
         targetPath = '/login';
       }
 
+      const opensInNewTab = link.itemKey === 'pricing';
+
       return (
-        <Link key={link.itemKey} to={targetPath} className={commonLinkClasses}>
+        <Link
+          key={link.itemKey}
+          to={targetPath}
+          className={commonLinkClasses}
+          target={opensInNewTab ? '_blank' : undefined}
+          rel={opensInNewTab ? 'noopener noreferrer' : undefined}
+        >
           {linkContent}
         </Link>
       );
@@ -70,7 +79,7 @@ const Navigation = ({
   };
 
   return (
-    <nav className='flex flex-1 items-center gap-1 lg:gap-2 mx-2 md:mx-4 overflow-x-auto whitespace-nowrap scrollbar-hide'>
+    <nav className='mx-2 flex flex-1 items-center gap-1 overflow-x-auto whitespace-nowrap scrollbar-hide md:mx-4 lg:gap-2'>
       <SkeletonWrapper
         loading={isLoading}
         type='navigation'

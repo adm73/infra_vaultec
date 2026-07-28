@@ -257,6 +257,7 @@ export function UsersMutateDrawer({
                         <Input
                           {...field}
                           placeholder={t('Enter username')}
+                          maxLength={32}
                           disabled={isUpdate}
                         />
                       </FormControl>

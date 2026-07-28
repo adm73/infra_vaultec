@@ -11,10 +11,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/i18n"
-	"github.com/QuantumNous/new-api/logger"
-	"github.com/QuantumNous/new-api/model"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/i18n"
+	"github.com/adm73/infra_vaultec/logger"
+	"github.com/adm73/infra_vaultec/model"
 	"github.com/gin-gonic/gin"
 )
 

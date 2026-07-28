@@ -27,6 +27,7 @@ import {
 } from '@douyinfe/semi-illustrations';
 import { useTranslation } from 'react-i18next';
 import MarkdownRenderer from '../markdown/MarkdownRenderer';
+import { sanitizeHtml as sanitizeUserHtml } from '../../../helpers/sanitize';
 
 // Check whether content is a URL.
 const isUrl = (content) => {
@@ -49,7 +50,7 @@ const isHtmlContent = (content) => {
 // Parse HTML content and extract inline styles.
 const sanitizeHtml = (html) => {
   const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = html;
+  tempDiv.innerHTML = sanitizeUserHtml(html);
 
   const styles = Array.from(tempDiv.querySelectorAll('style'))
     .map((style) => style.innerHTML)

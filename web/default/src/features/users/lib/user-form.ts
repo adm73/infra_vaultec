@@ -34,7 +34,10 @@ import { type UserFormData, type User } from '../types'
 // ============================================================================
 
 export const userFormSchema = z.object({
-  username: z.string().min(1, 'Username is required'),
+  username: z
+    .string()
+    .min(1, 'Username is required')
+    .max(32, 'Username must be at most 32 characters long'),
   display_name: z.string().optional(),
   password: z.string().optional(),
   role: z.number().optional(),

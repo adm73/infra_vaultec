@@ -32,6 +32,7 @@ import SkeletonWrapper from '../components/SkeletonWrapper';
 
 const UserArea = ({
   userState,
+  isConsoleRoute,
   isLoading,
   isMobile,
   isSelfUseMode,
@@ -58,17 +59,17 @@ const UserArea = ({
           position='bottomRight'
           getPopupContainer={() => dropdownRef.current}
           render={
-            <Dropdown.Menu className='!bg-semi-color-bg-overlay !border-semi-color-border !shadow-lg !rounded-lg dark:!bg-gray-700 dark:!border-gray-600'>
+            <Dropdown.Menu className='!rounded-2xl !border !border-[#e4c8a8]/55 !bg-white !shadow-[0_20px_50px_rgba(188,145,96,0.16)]'>
               <Dropdown.Item
                 onClick={() => {
                   navigate('/console/personal');
                 }}
-                className='!px-3 !py-1.5 !text-sm !text-semi-color-text-0 hover:!bg-semi-color-fill-1 dark:!text-gray-200 dark:hover:!bg-blue-500 dark:hover:!text-white'
+                className='!px-3 !py-1.5 !text-sm !text-[#5b3923] hover:!bg-[#fff7ef]'
               >
                 <div className='flex items-center gap-2'>
                   <IconUserSetting
                     size='small'
-                    className='text-gray-500 dark:text-gray-400'
+                    className='text-[#9a7455]'
                   />
                   <span>{t('个人设置')}</span>
                 </div>
@@ -77,12 +78,12 @@ const UserArea = ({
                 onClick={() => {
                   navigate('/console/token');
                 }}
-                className='!px-3 !py-1.5 !text-sm !text-semi-color-text-0 hover:!bg-semi-color-fill-1 dark:!text-gray-200 dark:hover:!bg-blue-500 dark:hover:!text-white'
+                className='!px-3 !py-1.5 !text-sm !text-[#5b3923] hover:!bg-[#fff7ef]'
               >
                 <div className='flex items-center gap-2'>
                   <IconKey
                     size='small'
-                    className='text-gray-500 dark:text-gray-400'
+                    className='text-[#9a7455]'
                   />
                   <span>{t('令牌管理')}</span>
                 </div>
@@ -91,24 +92,24 @@ const UserArea = ({
                 onClick={() => {
                   navigate('/console/topup');
                 }}
-                className='!px-3 !py-1.5 !text-sm !text-semi-color-text-0 hover:!bg-semi-color-fill-1 dark:!text-gray-200 dark:hover:!bg-blue-500 dark:hover:!text-white'
+                className='!px-3 !py-1.5 !text-sm !text-[#5b3923] hover:!bg-[#fff7ef]'
               >
                 <div className='flex items-center gap-2'>
                   <IconCreditCard
                     size='small'
-                    className='text-gray-500 dark:text-gray-400'
+                    className='text-[#9a7455]'
                   />
                   <span>{t('钱包管理')}</span>
                 </div>
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={logout}
-                className='!px-3 !py-1.5 !text-sm !text-semi-color-text-0 hover:!bg-semi-color-fill-1 dark:!text-gray-200 dark:hover:!bg-red-500 dark:hover:!text-white'
+                className='!px-3 !py-1.5 !text-sm !text-[#5b3923] hover:!bg-[#fff1df]'
               >
                 <div className='flex items-center gap-2'>
                   <IconExit
                     size='small'
-                    className='text-gray-500 dark:text-gray-400'
+                    className='text-[#9a7455]'
                   />
                   <span>{t('退出')}</span>
                 </div>
@@ -119,7 +120,7 @@ const UserArea = ({
           <Button
             theme='borderless'
             type='tertiary'
-            className='flex items-center gap-1.5 !p-1 !rounded-full hover:!bg-semi-color-fill-1 dark:hover:!bg-gray-700 !bg-semi-color-fill-0 dark:!bg-semi-color-fill-1 dark:hover:!bg-semi-color-fill-2'
+            className='flex items-center gap-1.5 !rounded-full !border !border-[#e4c8a8]/45 !bg-[#fffaf4] !p-1 hover:!bg-[#fff1df]'
           >
             <Avatar
               size='extra-small'
@@ -129,13 +130,13 @@ const UserArea = ({
               {userState.user.username[0].toUpperCase()}
             </Avatar>
             <span className='hidden md:inline'>
-              <Typography.Text className='!text-xs !font-medium !text-semi-color-text-1 dark:!text-gray-300 mr-1'>
-                {userState.user.username}
+              <Typography.Text className='mr-1 !text-xs !font-medium !text-[#6f4a31]'>
+                {isConsoleRoute ? userState.user.username : t('管理后台')}
               </Typography.Text>
             </span>
             <ChevronDown
               size={14}
-              className='text-xs text-semi-color-text-2 dark:text-gray-400'
+              className='text-xs text-[#9a7455]'
             />
           </Button>
         </Dropdown>
@@ -148,14 +149,13 @@ const UserArea = ({
       'flex items-center justify-center !py-[10px] !px-1.5';
 
     const loginButtonSpecificStyling =
-      '!bg-semi-color-fill-0 dark:!bg-semi-color-fill-1 hover:!bg-semi-color-fill-1 dark:hover:!bg-gray-700 transition-colors';
+      '!border !border-[#e4c8a8]/45 !bg-[#fffaf4] hover:!bg-[#fff1df] transition-colors';
     let loginButtonClasses = `${commonSizingAndLayoutClass} ${loginButtonSpecificStyling}`;
 
     let registerButtonClasses = `${commonSizingAndLayoutClass}`;
 
-    const loginButtonTextSpanClass =
-      '!text-xs !text-semi-color-text-1 dark:!text-gray-300 !p-1.5';
-    const registerButtonTextSpanClass = '!text-xs !text-white !p-1.5';
+    const loginButtonTextSpanClass = '!text-xs !text-[#6f4a31] !p-1.5';
+    const registerButtonTextSpanClass = '!text-xs !text-[#4a2a16] !p-1.5';
 
     if (showRegisterButton) {
       if (isMobile) {
@@ -185,7 +185,7 @@ const UserArea = ({
               <Button
                 theme='solid'
                 type='primary'
-                className={registerButtonClasses}
+                className={`${registerButtonClasses} !border !border-[#e4c8a8]/55 !bg-[#f4d7b0] hover:!bg-[#edd0a5]`}
               >
                 <span className={registerButtonTextSpanClass}>{t('注册')}</span>
               </Button>

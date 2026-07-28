@@ -1,5 +1,5 @@
 {
-  "name": "newapi-web",
+  "name": "vaultec-web",
   "version": "1.0.0",
   "private": false,
   "type": "module",
@@ -44,7 +44,7 @@
     "clsx": "catalog:",
     "cmdk": "^1.1.1",
     "dayjs": "catalog:",
-    "dompurify": "3.4.11",
+    "dompurify": "3.4.12",
     "i18next": "^26.3.4",
     "i18next-browser-languagedetector": "^8.2.1",
     "input-otp": "^1.4.2",
@@ -67,7 +67,7 @@
     "shiki": "^4.3.0",
     "sonner": "^2.0.7",
     "sse.js": "catalog:",
-    "stream-markdown-parser": "^1.0.9",
+    "stream-markdown-parser": "^1.1.4",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.2",
     "tokenlens": "^1.3.1",
@@ -93,13 +93,13 @@
     "knip": "^6.24.0",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
-    "shadcn": "^4.12.0"
+    "shadcn": "^4.14.1"
   },
   "overrides": {
     "brace-expansion": "2.1.1",
-    "dompurify": "3.4.11",
+    "dompurify": "3.4.12",
     "fast-uri": "3.1.2",
-    "hono": "4.12.22",
+    "hono": "4.12.32",
     "ip-address": "10.2.0",
     "js-cookie": "3.0.7",
     "mermaid": "11.15.0",

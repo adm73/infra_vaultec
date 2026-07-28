@@ -2,11 +2,12 @@ package controller
 
 import (
 	"time"
+	"unicode/utf8"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/constant"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/setting/operation_setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/constant"
+	"github.com/adm73/infra_vaultec/model"
+	"github.com/adm73/infra_vaultec/setting/operation_setting"
 	"github.com/gin-gonic/gin"
 )
 
@@ -68,11 +69,11 @@ func PostSetup(c *gin.Context) {
 
 	// If root doesn't exist, validate and create admin account
 	if !rootExists {
-		// Validate username length: max 12 characters to align with model.User validation
-		if len(req.Username) > 12 {
+		// Validate username length to match model.User validation.
+		if utf8.RuneCountInString(req.Username) > model.UserNameMaxLength {
 			c.JSON(200, gin.H{
 				"success": false,
-				"message": "用户名长度不能超过12个字符",
+				"message": "用户名长度不能超过32个字符",
 			})
 			return
 		}

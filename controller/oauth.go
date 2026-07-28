@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"unicode/utf8"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/i18n"
-	"github.com/QuantumNous/new-api/model"
-	"github.com/QuantumNous/new-api/oauth"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/i18n"
+	"github.com/adm73/infra_vaultec/model"
+	"github.com/adm73/infra_vaultec/oauth"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -250,7 +251,7 @@ func findOrCreateOAuthUser(c *gin.Context, provider oauth.Provider, oauthUser *o
 	if oauthUser.Username != "" {
 		if exists, err := model.CheckUserExistOrDeleted(oauthUser.Username, ""); err == nil && !exists {
 			// 防止索引退化
-			if len(oauthUser.Username) <= model.UserNameMaxLength {
+			if utf8.RuneCountInString(oauthUser.Username) <= model.UserNameMaxLength {
 				user.Username = oauthUser.Username
 			}
 		}

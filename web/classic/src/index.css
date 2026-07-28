@@ -1092,3 +1092,166 @@ html.dark .with-pastel-balls::before {
 .ec-dbcd0a3c01b55203 {
   forced-color-adjust: auto;
 }
+
+@keyframes classicHomeRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes classicHomeFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes classicHomeGlow {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.68;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes classicHomeGridMove {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+
+  100% {
+    background-position:
+      72px 36px,
+      36px 72px;
+  }
+}
+
+@keyframes classicHomeShimmer {
+  0% {
+    transform: translateX(-170%) skewX(-22deg);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.06;
+  }
+
+  50% {
+    opacity: 0.14;
+  }
+
+  100% {
+    transform: translateX(260%) skewX(-22deg);
+    opacity: 0;
+  }
+}
+
+@keyframes classicHomeBreathe {
+  0%,
+  100% {
+    box-shadow: 0 10px 24px rgba(201, 140, 79, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 18px 36px rgba(201, 140, 79, 0.22);
+  }
+}
+
+.classic-home-rise {
+  animation: classicHomeRise 0.82s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+.classic-home-rise-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.classic-home-rise-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.classic-home-rise-delay-3 {
+  animation-delay: 0.24s;
+}
+
+.classic-home-float {
+  animation: classicHomeFloat 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+.classic-home-float-alt {
+  animation: classicHomeFloat 11s ease-in-out infinite reverse;
+  will-change: transform;
+}
+
+.classic-home-glow {
+  animation: classicHomeGlow 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.classic-home-glow-delay-1 {
+  animation-delay: 1.4s;
+}
+
+.classic-home-glow-delay-2 {
+  animation-delay: 2.8s;
+}
+
+.classic-home-grid-motion {
+  animation: classicHomeGridMove 32s linear infinite;
+}
+
+.classic-home-breathe {
+  animation: classicHomeBreathe 4.8s ease-in-out infinite;
+}
+
+.classic-home-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.classic-home-sheen::after {
+  content: '';
+  position: absolute;
+  top: -12%;
+  bottom: -12%;
+  left: -24%;
+  width: 28%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0)
+  );
+  transform: translateX(-170%) skewX(-22deg);
+  animation: classicHomeShimmer 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .classic-home-rise,
+  .classic-home-float,
+  .classic-home-float-alt,
+  .classic-home-glow,
+  .classic-home-grid-motion,
+  .classic-home-breathe,
+  .classic-home-sheen::after {
+    animation: none !important;
+  }
+}

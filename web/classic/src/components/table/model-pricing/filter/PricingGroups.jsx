@@ -50,21 +50,10 @@ const PricingGroups = ({
         ? models.length
         : models.filter((m) => m.enable_groups && m.enable_groups.includes(g))
             .length;
-    let ratioDisplay = '';
-    if (g === 'all') {
-      // ratioDisplay = t('全部');
-    } else {
-      const ratio = groupRatio[g];
-      if (ratio !== undefined && ratio !== null) {
-        ratioDisplay = `${ratio}x`;
-      } else {
-        ratioDisplay = '1x';
-      }
-    }
     return {
       value: g,
       label: g === 'all' ? t('全部分组') : g,
-      tagCount: ratioDisplay,
+      tagCount: modelCount,
     };
   });
 

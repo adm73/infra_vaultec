@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/QuantumNous/new-api/setting/operation_setting"
-	"github.com/QuantumNous/new-api/setting/system_setting"
+	"github.com/adm73/infra_vaultec/setting/operation_setting"
+	"github.com/adm73/infra_vaultec/setting/system_setting"
 )
 
 func GetCallbackAddress() string {

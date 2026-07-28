@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api/constant"
+	"github.com/adm73/infra_vaultec/constant"
 )
 
 var (
@@ -22,10 +22,10 @@ var (
 )
 
 func printHelp() {
-	fmt.Println("NewAPI(Based OneAPI) " + Version + " - The next-generation LLM gateway and AI asset management system supports multiple languages.")
+	fmt.Println("Vaultec(Based OneAPI) " + Version + " - The next-generation LLM gateway and AI asset management system supports multiple languages.")
 	fmt.Println("Original Project: OneAPI by JustSong - https://github.com/songquanpeng/one-api")
-	fmt.Println("Maintainer: QuantumNous - https://github.com/QuantumNous/new-api")
-	fmt.Println("Usage: newapi [--port <port>] [--log-dir <log directory>] [--version] [--help]")
+	fmt.Println("Maintainer: Vaultec - https://github.com/adm73/infra_vaultec")
+	fmt.Println("Usage: vaultec [--port <port>] [--log-dir <log directory>] [--version] [--help]")
 }
 
 func InitEnv() {
@@ -46,18 +46,31 @@ func InitEnv() {
 		os.Exit(0)
 	}
 
-	if os.Getenv("SESSION_SECRET") != "" {
-		ss := os.Getenv("SESSION_SECRET")
+	sessionSecret := strings.TrimSpace(os.Getenv("SESSION_SECRET"))
+	if sessionSecret == "" && strings.EqualFold(os.Getenv("GIN_MODE"), "release") {
+		log.Fatal("SESSION_SECRET must be set in release mode")
+	}
+	if sessionSecret != "" {
+		ss := sessionSecret
 		if ss == "random_string" {
 			log.Println("WARNING: SESSION_SECRET is set to the default value 'random_string', please change it to a random string.")
 			log.Println("警告：SESSION_SECRET被设置为默认值'random_string'，请修改为随机字符串。")
 			log.Fatal("Please set SESSION_SECRET to a random string.")
-		} else {
-			SessionSecret = ss
 		}
+		if len(ss) < 32 {
+			log.Fatal("SESSION_SECRET must contain at least 32 characters")
+		}
+		SessionSecret = ss
 	}
-	if os.Getenv("CRYPTO_SECRET") != "" {
-		CryptoSecret = os.Getenv("CRYPTO_SECRET")
+	cryptoSecret := strings.TrimSpace(os.Getenv("CRYPTO_SECRET"))
+	if cryptoSecret == "" && strings.EqualFold(os.Getenv("GIN_MODE"), "release") {
+		log.Fatal("CRYPTO_SECRET must be set in release mode")
+	}
+	if cryptoSecret != "" {
+		if len(cryptoSecret) < 32 {
+			log.Fatal("CRYPTO_SECRET must contain at least 32 characters")
+		}
+		CryptoSecret = cryptoSecret
 	} else {
 		CryptoSecret = SessionSecret
 	}
@@ -73,11 +86,11 @@ func InitEnv() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		if _, err := os.Stat(*LogDir); os.IsNotExist(err) {
-			err = os.Mkdir(*LogDir, 0777)
-			if err != nil {
-				log.Fatal(err)
-			}
+		if err = os.MkdirAll(*LogDir, 0700); err != nil {
+			log.Fatal(err)
+		}
+		if err = os.Chmod(*LogDir, 0700); err != nil {
+			log.Fatal(err)
 		}
 	}
 

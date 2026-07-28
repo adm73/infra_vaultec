@@ -33,6 +33,7 @@ const ActionButtons = ({
   currentLang,
   onLanguageChange,
   userState,
+  isConsoleRoute,
   isLoading,
   isMobile,
   isSelfUseMode,
@@ -60,6 +61,7 @@ const ActionButtons = ({
 
       <UserArea
         userState={userState}
+        isConsoleRoute={isConsoleRoute}
         isLoading={isLoading}
         isMobile={isMobile}
         isSelfUseMode={isSelfUseMode}

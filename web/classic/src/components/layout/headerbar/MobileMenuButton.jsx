@@ -48,7 +48,7 @@ const MobileMenuButton = ({
       onClick={onToggle}
       theme='borderless'
       type='tertiary'
-      className='!p-2 !text-current focus:!bg-semi-color-fill-1 dark:focus:!bg-gray-700'
+      className='!rounded-full !border !border-[#e4c8a8]/45 !bg-[#fffaf4] !p-2 !text-[#7b5438] hover:!bg-[#fff1df] focus:!bg-[#fff1df]'
     />
   );
 };

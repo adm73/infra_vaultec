@@ -5,13 +5,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api/common"
-	"github.com/QuantumNous/new-api/setting"
-	"github.com/QuantumNous/new-api/setting/config"
-	"github.com/QuantumNous/new-api/setting/operation_setting"
-	"github.com/QuantumNous/new-api/setting/performance_setting"
-	"github.com/QuantumNous/new-api/setting/ratio_setting"
-	"github.com/QuantumNous/new-api/setting/system_setting"
+	"github.com/adm73/infra_vaultec/common"
+	"github.com/adm73/infra_vaultec/setting"
+	"github.com/adm73/infra_vaultec/setting/config"
+	"github.com/adm73/infra_vaultec/setting/operation_setting"
+	"github.com/adm73/infra_vaultec/setting/performance_setting"
+	"github.com/adm73/infra_vaultec/setting/ratio_setting"
+	"github.com/adm73/infra_vaultec/setting/system_setting"
 	"gorm.io/gorm"
 )
 

@@ -25,12 +25,24 @@ const UserAgreement = () => {
   const { t } = useTranslation();
 
   return (
-    <DocumentRenderer
-      apiEndpoint='/api/user-agreement'
-      title={t('用户协议')}
-      cacheKey='user_agreement'
-      emptyMessage={t('加载用户协议内容失败...')}
-    />
+    <>
+      <DocumentRenderer
+        apiEndpoint='/api/user-agreement'
+        title={t('用户协议')}
+        cacheKey='user_agreement'
+        emptyMessage={t('加载用户协议内容失败...')}
+      />
+      <div className='py-4 text-center text-[3px] opacity-20'>
+        <a
+          href='https://github.com/QuantumNous/new-api'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='!text-semi-color-text-3 hover:opacity-60 transition-opacity'
+        >
+          Frontend design and development by New API contributors.
+        </a>
+      </div>
+    </>
   );
 };
 

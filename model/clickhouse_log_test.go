@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/QuantumNous/new-api/common"
+	"github.com/adm73/infra_vaultec/common"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
